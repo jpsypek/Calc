@@ -31,6 +31,9 @@ def values_after_initialized
   elsif ["+", "-", "*", "/", "**"].include?(input)
     $calc.check_calculation(input)
     values_after_initialized
+  elsif $calc.values.length < 2
+    STDOUT.puts "Please enter a number:"
+    values_after_initialized
   else
     STDOUT.puts "Please enter a number or an operator:"
     values_after_initialized

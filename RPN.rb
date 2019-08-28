@@ -1,5 +1,6 @@
 class Calculator
 
+  attr_reader :values
   def initialize(value)
     @values = [value]
   end

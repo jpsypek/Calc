@@ -9,7 +9,6 @@ class App
   #Welcome message and instantiate an instance of the Calculator class
   def welcome
     STDOUT.puts "Welcome to the RPN calculator. To get started, please enter a number:"
-    @calc = Calculator.new()
     handle_input
   end
 
@@ -47,4 +46,4 @@ class App
   end
 end
 
-App.new().welcome
+App.new.welcome

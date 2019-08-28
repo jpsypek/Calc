@@ -11,8 +11,7 @@ def first_value
     $calc = Calculator.new(input.to_i)
     values_after_initialized
   elsif input == "q"
-    STDOUT.puts "goodbye"
-    exit
+    exit_app
   else
     STDOUT.puts "Please enter a number"
     first_value
@@ -25,10 +24,9 @@ def values_after_initialized
     $calc.add_value(input.to_i)
     values_after_initialized
   elsif input == "q"
-    STDOUT.puts "goodbye"
-    exit
+    exit_app
   elsif input == "+" || input == "-" || input == "*" || input == "/"
-    $calc.perform_calculation(input)
+    $calc.check_calculation(input)
     values_after_initialized
   else
     STDOUT.puts "Please enter a number or an operator:"
@@ -36,5 +34,9 @@ def values_after_initialized
   end
 end
 
+def exit_app
+  STDOUT.puts "goodbye"
+  exit
+end
 
 welcome

@@ -9,7 +9,7 @@ def first_value
   input = STDIN.gets.chomp()
   if input.to_i.to_s == input
     $calc = Calculator.new(input.to_i)
-    values_after_initialized(input.to_i)
+    values_after_initialized
   elsif input == "q"
     STDOUT.puts "goodbye"
     exit
@@ -19,7 +19,7 @@ def first_value
   end
 end
 
-def values_after_initialized(previous_value)
+def values_after_initialized
   input = STDIN.gets.chomp()
   if input.to_i.to_s == input
     $calc.add_value(input.to_i)

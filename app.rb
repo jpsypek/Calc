@@ -16,7 +16,7 @@ class App
   def handle_input
     input = STDIN.gets.chomp()
     if is_input_number?(input)
-      @calc.add_value(input.to_f)
+      @calc.add_value(input)
       handle_input
     elsif input == "q"
       exit_app

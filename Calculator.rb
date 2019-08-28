@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class Calculator
 
   attr_reader :values
@@ -15,8 +17,8 @@ class Calculator
     if @values.length < 2
       return STDOUT.puts "Please enter another number before performing an operation:"
     else
-      new_value = perform_calculation(operator, @values.pop(), @values.pop())
-      @values.push(new_value)
+      new_value = perform_calculation(operator, BigDecimal(@values.pop()), BigDecimal(@values.pop()))
+      @values << new_value
     end
     if @values.length == 1
       value_with_correct_decimals = @values[0].to_i == @values[0] ? @values[0].to_i : @values[0]
@@ -27,7 +29,7 @@ class Calculator
 #Performs the specified operation on the values and returns the results.
   def perform_calculation(operator, last_value, previous_value)
     calculated_value = previous_value.send(operator, last_value)
-    return calculated_value
+    return BigDecimal(calculated_value)
   end
 
 end

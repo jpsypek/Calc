@@ -11,13 +11,15 @@ class Calculator
   def check_calculation(operator)
     if @values.length < 2
       return STDOUT.puts "Please enter a number:"
-    elsif @values.length == 2
-      new_value = perform_calculation(operator, @values[1], @values[0])
-      @values = [new_value]
-      return STDOUT.puts "= #{@values[0]}"
-    else
+    else @values.length >= 2
       new_value = perform_calculation(operator, @values.pop(), @values.pop())
       @values.push(new_value)
+    # else
+    #   new_value = perform_calculation(operator, @values.pop(), @values.pop())
+    #   @values.push(new_value)
+    end
+    if @values.length == 1
+      STDOUT.puts "= #{@values[0]}"
     end
   end
 

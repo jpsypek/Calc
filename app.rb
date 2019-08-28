@@ -9,7 +9,7 @@ end
 #Calculator class must be initiated with a number value, so checks to make sure first input is either a number or "q" to exit the program, otherwise displays an error
 def first_value
   input = STDIN.gets.chomp()
-  if input.to_i.to_s == input || input.to_f.to_s == input
+  if is_input_number?(input)
     $calc = Calculator.new(input.to_f)
     values_after_initialized
   elsif input == "q"
@@ -22,7 +22,7 @@ end
 
 def values_after_initialized
   input = STDIN.gets.chomp()
-  if input.to_i.to_s == input || input.to_f.to_s == input
+  if is_input_number?(input)
     $calc.add_value(input.to_f)
     values_after_initialized
   elsif input == "q"
@@ -34,6 +34,10 @@ def values_after_initialized
     STDOUT.puts "Please enter a number or an operator:"
     values_after_initialized
   end
+end
+
+def is_input_number?(input)
+  input.to_i.to_s == input || input.to_f.to_s == input
 end
 
 def exit_app

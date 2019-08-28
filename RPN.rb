@@ -31,8 +31,10 @@ class Calculator
       calculated_value = previous_value * last_value
     when "/"
       calculated_value = previous_value / last_value
+    when "**"
+      calculated_value = previous_value ** last_value
     end
-    return calculated_value
+    return calculated_value.to_i == calculated_value ? calculated_value.to_i : calculated_value
   end
 
 end

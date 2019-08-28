@@ -31,18 +31,20 @@ def values_after_initialized
   elsif ["+", "-", "*", "/", "**"].include?(input)
     $calc.check_calculation(input)
     values_after_initialized
-  elsif $calc.values.length < 2
-    STDOUT.puts "Please enter a number:"
-    values_after_initialized
   else
-    STDOUT.puts "Please enter a number or an operator:"
-    values_after_initialized
+    handle_invalid_input
   end
 end
 
 #Returns a boolean describing whether the input is an interger or a float.
 def is_input_number?(input)
   input.to_i.to_s == input || input.to_f.to_s == input
+end
+
+#Displays correct error message based on whether the values stack has at least 2 values
+def handle_invalid_input
+  STDOUT.puts $calc.values.length >= 2 ? "Please enter a number or an operator:" : "Please enter a number:"
+  values_after_initialized
 end
 
 #Outputs "goodbye" then exits the application.`

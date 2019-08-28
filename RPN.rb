@@ -12,7 +12,7 @@ class Calculator
   def check_calculation(operator)
     if @values.length < 2
       return STDOUT.puts "Please enter a number:"
-    else @values.length >= 2
+    else
       new_value = perform_calculation(operator, @values.pop(), @values.pop())
       @values.push(new_value)
     end

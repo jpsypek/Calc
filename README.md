@@ -1,6 +1,6 @@
 # RPN Calculator
 
-The RPN Calculator is a CLI application that performs calculations based on the [Reverse Polish Notation] (https://en.wikipedia.org/wiki/Reverse_Polish_notation).
+The RPN Calculator is a CLI application that performs calculations based on the (https://en.wikipedia.org/wiki/Reverse_Polish_notation "Reverse Polish Notation").
 
 ## INSTRUCTIONS
 

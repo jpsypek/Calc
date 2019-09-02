@@ -13,35 +13,36 @@ class App
   end
 
   private
+
   #Checks if the input and if it is a number, adds the number to the stack (values). If it is an operator, calls class method check_calculation on the instance of the class to see if the calculation can be performed, and if so performs that calculation. If it is q, exits the application. Otherwise, displays a message asking for a number or operator.
   def handle_input
     input = STDIN.gets.chomp()
 
-    if is_input_number?(input)
+    if input_is_number?(input)
       @calc.add_value(input)
       handle_input
+    elsif input_is_operator?(input)
+      handle_operator_input(input)
     elsif input == "q"
       exit_app
-    elsif ["+", "-", "*", "/", "**"].include?(input)
-      handle_operator_input(input)
     else
       handle_invalid_input
     end
 
   end
 
-  #Checks the current stack to see if an operation can be performed. If the stack is >= 2, performs the input operation on the top two values of the stack and updates the stack with that result on top. If this results is a stack of 1, that value is output as a float or integer based on whats necessary (ex, 1.0 will be returned as 1, 1.5 will be returned as 1.5).
+  #Checks the values stack to see if an operation can be performed. If the stack is >= 2, performs the input operation on the top two values of the stack and updates the stack with that result on top (replacing the previous two values). If this results in a stack of 1, that value is output as a float or integer based on whats necessary (ex, 1.0 will be returned as 1, 1.5 will be returned as 1.5).
   def handle_operator_input(operator)
 
     if @calc.values.length < 2
       STDOUT.puts "There must be at least 2 numbers in the stack to perform an operation. Please enter a number:"
       handle_input
     else
-      @calc.perform_calculation(operator, BigDecimal(@calc.values.pop()), BigDecimal(@calc.values.pop()))
+      @calc.perform_calculation(operator)
     end
 
     if @calc.values.length == 1
-      value_with_correct_decimals = @calc.values[0].to_i == @calc.values[0] ? @calc.values[0].to_i : @calc.values[0]
+      value_with_correct_decimals = @calc.values[0].to_i == @calc.values[0] ? @calc.values[0].to_i : @calc.values[0].to_f
       STDOUT.puts "= #{value_with_correct_decimals}"
     end
 
@@ -49,8 +50,13 @@ class App
   end
 
   #Returns a boolean describing whether the input is an interger or a float.
-  def is_input_number?(input)
+  def input_is_number?(input)
     input.to_i.to_s == input || input.to_f.to_s == input
+  end
+
+  #Returns a boolean describing whether the input is an operator.
+  def input_is_operator?(input)
+    ["+", "-", "*", "/", "**"].include?(input)
   end
 
   #Displays correct error message based on whether the values stack has at least 2 values
@@ -64,6 +70,7 @@ class App
     STDOUT.puts "goodbye"
     exit
   end
+
 end
 
 App.new.welcome

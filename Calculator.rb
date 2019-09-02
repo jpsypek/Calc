@@ -12,9 +12,11 @@ class Calculator
     @values << BigDecimal(value)
   end
 
-  #Performs the specified operation on the values and adds the result to the values array.
-  def perform_calculation(operator, last_value, previous_value)
-    calculated_value = previous_value.send(operator, last_value)
+  #Removes the last two values in the stack and performs the specified operation on them, then adds the result to the values array.
+  def perform_calculation(operator)
+    last_value = values.pop()
+    second_to_last_value = values.pop()
+    calculated_value = second_to_last_value.send(operator, last_value)
     add_value(calculated_value)
   end
 

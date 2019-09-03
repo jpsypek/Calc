@@ -16,7 +16,7 @@ class Calculator
   def perform_calculation(operator)
     last_value = values.pop()
     second_to_last_value = values.pop()
-    calculated_value = second_to_last_value.send(operator, last_value)
+    calculated_value = second_to_last_value.public_send(operator, last_value)
     add_value(calculated_value)
   end
 

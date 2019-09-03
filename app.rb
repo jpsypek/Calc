@@ -6,7 +6,7 @@ class App
     @calc = Calculator.new
   end
 
-  #Welcome message and instantiate an instance of the Calculator class
+  #Welcome message and calls handle_input
   def welcome
     STDOUT.puts "Welcome to the RPN calculator. To get started, please enter a number:"
     handle_input
@@ -14,7 +14,7 @@ class App
 
   private
 
-  #Checks if the input and if it is a number, adds the number to the stack (values). If it is an operator, calls class method check_calculation on the instance of the class to see if the calculation can be performed, and if so performs that calculation. If it is q, exits the application. Otherwise, displays a message asking for a number or operator.
+  #Gets a user input and checks it's value. If it is a number, adds the number to the stack (values) of the instance of the calculator class. If it is an operator, calls handle_operator_input to see if a calculation can be performed. If it is q, exits the application. Otherwise, displays a message asking for a number or operator.
   def handle_input
     input = STDIN.gets.chomp()
 
@@ -31,7 +31,7 @@ class App
 
   end
 
-  #Checks the values stack to see if an operation can be performed. If the stack is >= 2, performs the input operation on the top two values of the stack and updates the stack with that result on top (replacing the previous two values). If this results in a stack of 1, that value is output as a float or integer based on whats necessary (ex, 1.0 will be returned as 1, 1.5 will be returned as 1.5).
+  #Checks the calculator's values stack to see if an operation can be performed. If the stack is >= 2, performs the input operation on the top two values of the stack and updates the stack with that result on top (replacing the previous two values). If this results in a stack of 1, that value is output as a float or integer based on whats necessary (ex, 1.0 will be output as 1, 1.5 will be output as 1.5).
   def handle_operator_input(operator)
 
     if @calc.values.length < 2
@@ -49,7 +49,7 @@ class App
     handle_input
   end
 
-  #Returns a boolean describing whether the input is an interger or a float.
+  #Returns a boolean describing whether the input is an interger OR a float.
   def input_is_number?(input)
     input.to_i.to_s == input || input.to_f.to_s == input
   end
@@ -59,13 +59,13 @@ class App
     ["+", "-", "*", "/", "**"].include?(input)
   end
 
-  #Displays correct error message based on whether the values stack has at least 2 values
+  #Displays correct error message based on whether the values stack has at least 2 values.
   def handle_invalid_input
     STDOUT.puts @calc.values.length >= 2 ? "Please enter a number or an operator:" : "Please enter a number:"
     handle_input
   end
 
-  #Outputs "goodbye" then exits the application.`
+  #Outputs "goodbye" then exits the application.
   def exit_app
     STDOUT.puts "goodbye"
     exit
